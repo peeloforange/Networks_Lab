@@ -1,0 +1,23 @@
+Following configurations are made on R2 to block access of 10.0.0.2 to network connected on interface fa0/1 of R2 i.e 30.0.0.0
+
+R2>enable
+R2#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R2(config)#access-list 1 10.0.0.2 0.0.0.0
+                         ^
+% Invalid input detected at '^' marker.
+	
+R2(config)#access-list 1 deny 10.0.0.2 0.0.0.0
+R2(config)#access-list permit any
+                       ^
+% Invalid input detected at '^' marker.
+	
+R2(config)#access-list 1 permit any
+R2(config)#int fa0/1
+R2(config-if)#access-group 1 out
+               ^
+% Invalid input detected at '^' marker.
+	
+R2(config-if)#ip access-group 1 out
+R2(config-if)#exit
+R2(config)#
